@@ -84,18 +84,48 @@ $(function() {
       })
 
 
+      describe('Initial Entries', function() {
+        // This is the test to check if loadFeed function works
 
-
-    /* TODO: Write a new test suite named "Initial Entries" */
-
-        /* TODO: Write a test that ensures when the loadFeed
+        /* A test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
-         * Remember, loadFeed() is asynchronous so this test will require
-         * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+         beforeEach(function (done) {
+           for (var id = 0; id<allFeeds.length; id++) {
+           loadFeed(id, function() {
+           done();
+           })
+         };
+         });
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
+        it('there is at least a single .entry element', function(done) {
+          const feed = document.querySelector('.feed');
+          expect(feed.firstElementChild).toBeDefined();
+          done();
+        });
+      });
+
+//       describe('New Feed Selection', function() {
+//         // This is the test to check if the content is changing after loading a new feed by the loadFeed function
+//         beforeEach(function (done) {
+//           for (var id = 0; id<allFeeds.length; id++) {
+//           loadFeed(id, function() {
+//           done();
+//           })
+//         };
+//         });
+//
+//         it('new feeds arrive', function(done) {
+// // TODO spr czy przy loadFeed(1).innerhtml jest różny od ladFeed(2);
+//         done();
+//         })
+//       })
+
+
+
+
+
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
