@@ -37,8 +37,7 @@ $(function() {
              expect(x.url).toBeDefined();
              expect(x.url).not.toBe('');
            }
-
-         })
+         });
 
         /* A test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
@@ -66,8 +65,7 @@ $(function() {
         const element = document.querySelector('body');
         it('the menu is hidden by default', function() {
           expect(element.classList.contains('menu-hidden')).toBe(true);
-
-        })
+        });
 
         /* A test that ensures the menu changes
          * visibility when the menu icon is clicked.
@@ -80,9 +78,8 @@ $(function() {
            // second click
            menuIcon.click();
            expect(element.classList.contains('menu-hidden')).toBe(true);
-         })
-      })
-
+         });
+      });
 
       describe('Initial Entries', function() {
         // This is the test to check if loadFeed function works
@@ -97,7 +94,7 @@ $(function() {
            done();
            })
          };
-         });
+       });
 
         it('there is at least a single .entry element', function(done) {
           const feed = document.querySelector('.feed');
@@ -106,29 +103,22 @@ $(function() {
         });
       });
 
-//       describe('New Feed Selection', function() {
-//         // This is the test to check if the content is changing after loading a new feed by the loadFeed function
-//         beforeEach(function (done) {
-//           for (var id = 0; id<allFeeds.length; id++) {
-//           loadFeed(id, function() {
-//           done();
-//           })
-//         };
-//         });
-//
-//         it('new feeds arrive', function(done) {
-// // TODO spr czy przy loadFeed(1).innerhtml jest różny od ladFeed(2);
-//         done();
-//         })
-//       })
+      describe('New Feed Selection', function() {
+        // This is the test to check if the content is changing after loading a new feed by the loadFeed function
+        var feed1, feed2;
+        beforeEach(function(done) {
+          loadFeed(1, function() {
+          feed1 = document.querySelector('.feed').innerHTML;
+          loadFeed(2, function() {
+            feed2 = document.querySelector('.feed').innerHTML;
+            done();
+          })
+        })
+      });
 
-
-
-
-
-
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
+        it('new feeds arrive', function(done) {
+          expect(feed1).not.toBe(feed2);
+          done();
+        });
+      });
 }());
