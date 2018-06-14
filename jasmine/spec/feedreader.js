@@ -98,7 +98,8 @@ $(function() {
 
         it('there is at least a single .entry element', function(done) {
           const feed = document.querySelector('.feed');
-          expect(feed.firstElementChild).toBeDefined();
+          const entry = feed.querySelector('.entry-link').querySelectorAll('.entry');
+          expect(entry.length).toBeGreaterThan(0);
           done();
         });
       });
